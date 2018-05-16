@@ -1,7 +1,7 @@
 #include "../include/aho_corasick.hpp"
 
 int GetIndInAlphabet(char ch) {
-   for(int i = 0; i < alphabet.size(); ++i) {
+   for(size_t i = 0; i < alphabet.size(); ++i) {
       if(alphabet[i] == ch)
          return i;
    }
@@ -27,25 +27,28 @@ void Trie::TrieInit() { //инициализация бора
 }
 
 int Trie::GetSuffLink(int v) {
-      if (trie[v].suff_link == -1) //если еще не считали
+      if (trie[v].suff_link == -1) { //если еще не считали
          //если v - корень или предок v - корень
          if (v == 0 || trie[v].parent == 0)
             trie[v].suff_link = 0;
          else
             trie[v].suff_link = GetAutoMove
             (GetSuffLink(trie[v].parent), GetIndInAlphabet(trie[v].symb));
+      }
       return trie[v].suff_link;
 }
 
 int Trie::GetAutoMove(int v, int ch) {
-      if (trie[v].auto_move[ch] == -1)
+      if (trie[v].auto_move[ch] == -1) {
          if (trie[v].next_vrtx[ch] != -1)
             trie[v].auto_move[ch] = trie[v].next_vrtx[ch];
-         else
+         else {
             if (v == 0)
                trie[v].auto_move[ch] = 0;
             else
                trie[v].auto_move[ch] = GetAutoMove(GetSuffLink(v), ch);
+         }
+      }
       return trie[v].auto_move[ch];
 }
 

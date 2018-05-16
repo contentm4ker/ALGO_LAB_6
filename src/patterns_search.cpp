@@ -5,7 +5,7 @@ int main() {
    string text, patt;
    int n;
    cin >> text >> n;
-   for(size_t i = 0; i < n; ++i) {
+   for(size_t i = 0; i < (unsigned)n; ++i) {
       cin >> patt;
       tr.AddStringToTrie(patt);
    }

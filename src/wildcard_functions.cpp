@@ -30,7 +30,7 @@ void PositionsOfFullPattern(Trie& tr, int pattern_sz, int text_sz) {
 vector<int> ResultPos(Trie& tr) {
     vector<int> res;
     for(size_t i = 0; i < tr.C.size(); ++i) {
-        if(tr.C[i] == tr.pattern.size())
+        if((unsigned)tr.C[i] == tr.pattern.size())
             res.push_back(i + 1);
     }
     return res;
